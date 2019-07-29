@@ -20,8 +20,8 @@ class ChartDemo extends React.Component {
   }
 
   showModal = (item) => {
-    let labelName = item[0]._model.label;
-    let labelValue = this.state.datasets[0].data[item[0]._index]
+    let labelName = item && (item.length > 0 ? item[0]._model.label:"cliked outside region");
+    let labelValue = item && (item.length > 0 ? this.state.datasets[0].data[item[0]._index]:"clicked outside region");
     this.setState({ show: true, labelName, labelValue });
   };
 
@@ -37,6 +37,7 @@ class ChartDemo extends React.Component {
     let {labelName, labelValue} = this.state
     let options = {
       'onClick': function (evt, item) {
+
         showModal(item)
         console.log('legend onClick', evt);
         console.log('legd item', item);
